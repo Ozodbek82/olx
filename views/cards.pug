@@ -1,0 +1,49 @@
+extends layout
+block content
+    include navbar    
+    .ml-4    
+        h1=title
+        
+    .container
+            .row
+            
+                .col-sm-5.col-lg-5
+                    .image-holder    
+                        img.card-img.img2.img-responsive(src='/'+db.photo)                                       
+                .col-5.col-lg-4
+                    ul
+                        li.mb-3
+                            if db.author==user._id
+                                a(href="/edit/"+db.id class="btn btn-success") O`zgartirish
+                                span.ml-3
+                                a(href="/delete/"+db.id class="btn btn-danger") O`chirish
+                        hr
+                        li.mb-3
+                            h4 Kategoriyasi: #{db.category}
+                        li.mb-3
+                            h3 Nomi: #{db.title}
+                        li.mb-3                            
+                            if(db.sale>0)
+                                h4 Eski narxi: #{db.price}
+                            h4 Narxi: #{db.price-(db.price*db.sale/100)}
+                        li
+                            h5 Qoyilgan vaqti: #{db.dateNow.toDateString()}
+                        hr
+                        li.mb-3
+                            p.like
+                                span=db.like
+                        li.mb-3
+                            .scrollspy-example
+                                h5 Tavsifi: #{db.comments}
+                        hr
+                    .btn-group-vertical.address
+                        .mb-3(class="phone1") Avtor: #{auth.name}
+                        if(user._id!=db.author)
+                            a.mb-3(href='/auth_messages/'+db.author+'/'+user._id type="button" class="btn btn-outline-primary") Avtorga murojaat
+                        a.mb-3(href='/auth_pro/'+db.author type="button" class="btn btn-outline-primary") Avtorning boshqa elonlari 
+                        input(type="hidden" class="pro" value=auth.phone)
+                        .phone.mb-3(id='phoneNumber') Telefon nomeri
+    include footer
+    script.
+        let  onReady=function(){jQuery('.phone').on('click',function(){jQuery(this).html(jQuery('.pro').val())})}
+        jQuery(onReady);

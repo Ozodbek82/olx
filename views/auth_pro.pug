@@ -1,0 +1,29 @@
+extends layout
+block content
+    
+    include navbar
+    .container
+        h1=title
+        .card-group
+            each db in arr
+                .card1  
+                    
+                    .product_img(cardId='/cards/'+db.id )
+                        img.img-responsive.card-img-top.img1( src='/'+db.photo alt="" )
+                        if(db.sale>0)
+                            .p1
+                                p.p2=`-${db.sale}% `
+                    p.category=db.category
+                    h3=db.title
+                    .price
+                        if(db.sale>0)
+                            p.old_price=db.price
+                        p.sale_price=db.price-(db.price*db.sale/100)
+                    .product_bottom.card-footer
+                        p.like
+                            span(class='writeLike')=db.like
+                            button.ml-3(class='clickLike' likeId='/like/'+db.id) like
+                        p.data=db.dateNow.toDateString()
+    include footer                 
+    
+        

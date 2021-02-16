@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        //-link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous")
+        link(rel="stylesheet" href="/public/stylesheets/bootstrap.css")
+        link(rel="stylesheet", href="/public/stylesheets/style.css")
+        title Document
+  body    
+    block content    
+        include navbar
+        .container
+            .row
+                .chat_window
+                    .top_menu
+                        .buttons
+                            .button.close
+                            .button.minimize
+                            .button.maximize
+                        .title 
+                            h1 xabar qoldirish sahifasi                            
+                    .messages#mes
+                        each db in arr
+                            if user._id==db.reader_id
+                                .message.right
+                                    
+                                    .text_wrapper
+                                        .text
+                                            p.pb #{db.writer_name}
+                                            hr
+                                            p #{db.message}
+                                            p.pf #{db.date_message.toLocaleString()}
+                            else if user._id==db.writer_id        
+                                .message.left
+                                    
+                                    .text_wrapper
+                                        .text
+                                            p.pb #{user.username}
+                                            hr
+                                            p #{db.message}
+                                            p.pf #{db.date_message.toLocaleString()}
+                                
+                    .bottom_wrapper.clearfix
+                        form(action="/msg_send" method='POST')
+                            .message_input_wrapper
+                                input(class='message_input' type="text" name="sms" placeholder='xabarni bu yerga yozing...' required)
+                                input#textarea(name="kod",value=sum, type='hidden')
+                                //-input(type="hidden" name="reader_id" value=names._id)
+                                input(type="hidden" name="reader_name" value=names.username)
+                                //-input(type="hidden" name="writer_id" value=user._id)
+                                input(type="hidden" name="user_name" value=user.username)
+                                
+                            .send_message
+                                .icon
+                                button(type='submit').btn.text Send
+                .message_template
+                    li.message
+                        .avatar
+                        .text_wrapper
+        //- script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+        //- script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous")
+        //- script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous")
+        script(src='/public/javascripts/jquery.js')
+        script(src="/public/javascripts/scr.js" )
+        script(src="/public/javascripts/popper.min.js")
+        script(src="/public/javascripts/bootstrap.js")
+        //- script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+        //- script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous")
+        //- script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous")
+    
+        script.                        
+            let block = document.getElementById('mes');
+            let maxScroll = block.scrollHeight;
+            block.scrollTop = maxScroll;
+            //- $('body').data('hidden',user.username)

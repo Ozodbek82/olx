@@ -1,0 +1,26 @@
+extends layout
+block content
+    include navbar
+    row.mx-auto.col-md-10
+        .col-md-8.col-xs-12.mr-auto
+            h1=title
+                form(action="" method='POST' enctype='multipart/form-data' )
+                    .form-holder.active
+                        input.form-control(type='text' name='title' placeholder="Maxsulotning nomi" required)
+                    .form-holder
+                        input.form-control(type="number" name="price" placeholder="Maxsulotning narxi" required)
+                    .form-holder
+                        input.form-control(type="number" name="sale" placeholder="Maxsulotning chegirmasi")
+                    .form-holder
+                        select.form-control(name="category")
+                            option(value="car") car
+                            option(value="phone") phone
+                            option(value="clothes") clothes
+                            option(value="books") books
+                            option(value="job") job
+                    .form-holder
+                        input.form-control(type="file" name="photo" placeholder="Maxsulotning rasmi" accept="image/*" required)
+                    textarea.form-control(name="comments", cols="30",rows="10")
+                    button.form-control.btn-danger Jo`natish
+    include footer
+    

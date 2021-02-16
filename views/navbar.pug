@@ -1,0 +1,49 @@
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-1
+    a.navbar-brand(href="/") Bosh sahifa
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+    #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                a.nav-link(href='/') Home
+                span.sr-only (current)
+            if user
+                li.nav-item
+                    a.nav-link(href='/add') Maxsulot qo`shish
+            li.nav-item
+                a.nav-link.disabled(href='#' tabindex='-1' aria-disabled='true') 
+            //- li.nav-item.dropdown
+                //- a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                //-     | UZ so`mda
+                //- .dropdown-menu(aria-labelledby='navbarDropdown')
+                //-     a.dropdown-item(href='#') US dollars
+                //-     a.dropdown-item(href='#') Russian roubles
+                //-     .dropdown-divider
+                //-     a.dropdown-item(href='#') UZB so`m
+            if user
+                .xat.mr-2            
+                    a.nav-link.svg(href="/mail") Xatlar
+                    
+        .kurs
+            if kurs
+                each valyuta in kurs
+                    if valyuta.Ccy=="USD"
+                        p=valyuta.Ccy
+                        p=valyuta.Rate
+            else
+                each valyuta in kurs ? valyuta : []
+                    if valyuta.Ccy=="USD"
+                        p=valyuta.Ccy
+                        p=valyuta.Rate    
+        form.form-inline.my-2.my-lg-0.search(action='/search')
+            input.form-control.mr-sm-2(type='text' name="search" placeholder='Search' aria-label='Search')
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+        ul.navbar-nav
+            if user
+                li.nav-item
+                    a.nav-link(href='/logOut') LogOut
+            else
+                li.nav-item
+                    a.nav-link(href='/user') Sign up
+                li.nav-item
+                    a.nav-link(href='/login') Sign In

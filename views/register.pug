@@ -1,0 +1,21 @@
+extends layout
+block content
+    include navbar
+    row.mx-auto.col-md-10
+        .col-md-8.col-xs-12.mr-auto
+            h1=title
+                form(action="/user" method='POST')
+                    .form-holder.active
+                        input.form-control(type='text' name='name' placeholder="Ism" required)
+                    .form-holder
+                        input.form-control(type="text" name="username" placeholder="Username" required)
+                    .form-holder
+                        input.form-control(type="number" name="phone" placeholder="Telefon nomeri kiriting" required)
+                    .form-holder
+                        input.form-control(type="text" name="email" placeholder="Email" required)
+                    .form-holder
+                        input.form-control(type="password" name="password" placeholder="Parolni kiriting" required)
+                    .form-holder
+                        input.form-control(type="password" name="password2" placeholder="Parolni qayta kiriting" required)
+                    button.form-control.btn-danger Ro`yhatdan o`tish
+    include footer    
