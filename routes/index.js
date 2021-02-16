@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
     fetch("http://www.cbu.uz/oz/arkhiv-kursov-valyut/json/")
     .then(data=>data.json())    
     .then(body =>
-        DbProduct.count((err,match)=>{
+        DbProduct.countDocuments((err,match)=>{
           res.render("index", {
             title: "Bosh sahifa",
             datas: data,
